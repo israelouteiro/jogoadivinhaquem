@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GAME ADVINHA QUEM</title>
+<style>
+*{
+	font-family: helvetica, Tahoma, Arial;
+}
+.mostraMario{
+	position:absolute;
+	top:0;
+	left:0;
+	width:600px;
+	height:auto;
+}
+.mostraFota{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 600px;
+	height: 678px;
+	overflow: hidden;
+}
+ul{
+	position: absolute;
+	top: 700px;
+	width: 600px;
+	list-style-type: none;
+	text-align: center;
+	left: -25px;
+}
+ul li{
+	display:inline-table; 
+	width:auto;
+	height:40px;
+	line-height:40px;
+	text-align:center; 
+	font-size:16px; 
+	background:none;
+	padding-top:5px;
+	cursor:pointer;
+	padding-left:10px;
+	padding-right:10px;
+	margin: 3px 7px;
+	border-radius: 5px;
+    color: #b4000b;
+    border: 1px solid #b4000b;
+
+	font-weight: 200;
+}
+.removido{
+	opacity: .4;
+}
+
+.link{
+	position: absolute;
+	top: 1000px;
+	left: 0;
+	margin-bottom: 100px;
+	color: #b4000b;
+	font-weight: 200;
+}
+
+
+.link table {
+	margin-left: 25px;
+}
+
+.link table tr{
+	height: 40px;
+} 
+
+.bt-navegation{
+	display: block;
+	width: 180px;
+	height: 40px;
+	line-height: 40px; 
+	text-align: center;  
+	border-radius: 5px;
+	font-size: 16px;
+	border: 1px solid #b4000b;
+}
+
+.principal-content{
+	position: absolute;
+	width: 600px;
+	height: auto;
+	left: 50%;
+	top: 100px;
+	margin-left: -300px;
+}
+
+#mostraVez{
+	width:40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	border: 1px solid #b4000b;
+	color: #fff;
+	background: #b4000b;
+	border-radius: 50%;
+	font-weight: 200;
+}
+
+h1{
+	color: #b4000b;
+	text-align: center;
+}
+
+copyright{
+	position: fixed;
+	bottom: 0;
+	right: 2px;
+	color:rgba(180, 0, 11, .17);
+}
+
+::selection{
+	background:rgba(180, 0, 11, .27);
+	color: white;
+}
+</style>
+<script>
+var fotoAmostra;
+var minimoFotos = 1;
+var maximoFotos = 18;
+var target_folder = 'fotosCabecas';
+	function remv(oq){
+		document.getElementById(oq).setAttribute('class','removido');
+		document.getElementById('remove'+oq).style.display = 'none';
+		document.getElementById(oq).setAttribute('onclick','recoloca(this.id);');
+	}
+	function recoloca(oq){
+		document.getElementById(oq).setAttribute('class','');
+		document.getElementById('remove'+oq).style.display = 'block';
+		document.getElementById(oq).setAttribute('onclick','remv(this.id);');
+	}
+	function iniciaJogo(){
+		document.getElementById('imagemEscondida').setAttribute('src',target_folder+'/1.jpg');
+		document.getElementById('anterior').style.display = 'none';
+		fotoAmostra = minimoFotos;
+		document.getElementById('mostraVez').innerHTML = fotoAmostra;
+	}
+	function move(donde){
+		if(donde=='a'){
+			fotoAmostra--;	
+		}else{
+			fotoAmostra++;
+		}
+		for(var i=1;i<=11;i++){
+			recoloca(i);
+		}
+		if(fotoAmostra==minimoFotos){
+			document.getElementById('anterior').style.display = 'none';
+		}
+		if(fotoAmostra>minimoFotos){
+			document.getElementById('anterior').style.display = 'block';
+		}
+		if(fotoAmostra<maximoFotos){
+			document.getElementById('proximo').style.display = 'block';
+		}
+		if(fotoAmostra==maximoFotos){
+			document.getElementById('proximo').style.display = 'none';
+		}
+		document.getElementById('mostraVez').innerHTML = fotoAmostra;
+		document.getElementById('imagemEscondida').setAttribute('src',target_folder+'/'+fotoAmostra+'.jpg');
+	}
+	function removeAll(){
+		for( var i=1; i<=11; i++ ){
+			remv(i);
+		}
+	}
+</script>
+</head>
+
+<body onload="iniciaJogo()">
+
+<h1>
+	Advinha Quem é
+</h1>
+
+<section class="principal-content">
+	<div class="mostraFota">
+		<img id="imagemEscondida" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove1">
+		<img src="mario/bone.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove2">
+		<img src="mario/costeletas.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove3">
+		<img src="mario/bigode.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove4">
+		<img src="mario/faceBaixoDireita.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove5">
+		<img src="mario/orelhas.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove6">
+		<img src="mario/faceCimaDireita.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove7">
+		<img src="mario/faceCimaEsquerda.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove8">
+		<img src="mario/faceBaixoEsquerda.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove9">
+		<img src="mario/olhos.png" width="600" />
+	</div>
+
+
+	<div class="mostraMario" id="remove10">
+		<img src="mario/nariz.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove11">
+		<img src="mario/sombrancelhas.png" width="600" />
+	</div>
+
+	<div class="mostraMario" id="remove12">
+		<img src="mario/fundo.png" width="600" />
+	</div>
+
+	<ul>
+		<li id="1" onclick="remv(this.id);">CHAPÉU</li>
+	    <li id="2" onclick="remv(this.id);">COSTELETAS</li>
+	    <li id="6" onclick="remv(this.id);">ROSTO CIMA DIREITA</li>
+	    <li id="7" onclick="remv(this.id);">ROSTO CIMA ESQUERDA</li>
+	    <li id="5" onclick="remv(this.id);">ORELHAS</li>
+		<li id="11" onclick="remv(this.id);">SOMBRANCELHAS</li>
+		<li id="9" onclick="remv(this.id);">OLHOS</li>
+		<li id="10" onclick="remv(this.id);">NARIZ</li>
+	    <li id="3" onclick="remv(this.id);">BIGODE</li>
+	    <li id="4" onclick="remv(this.id);">ROSTO BAIXO DIREITA</li> 
+	    <li id="8" onclick="remv(this.id);">ROSTO BAIXO ESQUERDA</li>   
+	</ul>
+
+	<div class="link">
+		<table width="600" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td width="275"  align="center" ><a id="anterior" class="bt-navegation" onclick="move('a');" style="cursor:pointer;display:none;">< Anterior</a></td>
+		    <td width="50"   align="center" ><div id="mostraVez"></div></td>
+		    <td width="275"  align="center" ><a id="proximo" class="bt-navegation" onclick="move('p');" style="cursor:pointer;">Próximo ></a></td>
+		  </tr>
+		  <tr>
+		  	<td colspan="3" align="center">
+		  		<a id="rmAll" class="bt-navegation" onclick="removeAll()" style="cursor:pointer;margin-top:50px;">Remover Tudo</a>
+		  	</td>
+		  </tr>
+		</table>
+	</div>
+</section>
+<copyright>
+	powered by israelLabs ® 2010 ~ 2017
+</copyright>
+</body>
+</html>

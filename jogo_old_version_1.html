@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GAME ADVINHA QUEM</title>
+<style>
+.mostraMario{
+	position:absolute;
+	top:0;
+	left:0;
+	width:600px;
+	height:auto;
+}
+.mostraFota{
+	position: absolute;
+	top: 79px;
+	left: 1px;
+	width: 600px;
+	height: 600px;
+	overflow: hidden;
+}
+ul{
+	position: absolute;
+	top: 700px;
+	width: 595px;
+	list-style-type: none;
+	text-align: center;
+	left: 0px;
+}
+ul li{
+	display:block;
+	float:left;
+	width:auto;
+	height:25px;
+	text-align:center;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:16px;
+	color:#069;
+	background:#CCC;
+	padding-top:5px;
+	cursor:pointer;
+	padding-left:10px;
+	padding-right:10px;
+}
+.removido{
+	background:#FFF;
+}
+.link{
+	position: absolute;
+	top: 844px;
+	left: 39px;
+}
+</style>
+<script>
+var fotoAmostra;
+var minimoFotos = 1;
+var maximoFotos = 18;
+var target_folder = 'fotosCabecas_old_version_1';
+	function remv(oq){
+		document.getElementById(oq).setAttribute('class','removido');
+		document.getElementById('remove'+oq).style.display = 'none';
+		document.getElementById(oq).setAttribute('onclick','recoloca(this.id);');
+	}
+	function recoloca(oq){
+		document.getElementById(oq).setAttribute('class','');
+		document.getElementById('remove'+oq).style.display = 'block';
+		document.getElementById(oq).setAttribute('onclick','remv(this.id);');
+	}
+	function iniciaJogo(){
+		document.getElementById('imagemEscondida').setAttribute('src',target_folder+'/1.jpg');
+		document.getElementById('anterior').style.display = 'none';
+		fotoAmostra = minimoFotos;
+		document.getElementById('mostraVez').innerHTML = fotoAmostra;
+	}
+	function move(donde){
+		if(donde=='a'){
+			fotoAmostra--;	
+		}else{
+			fotoAmostra++;
+		}
+		for(var i=1;i<=11;i++){
+			recoloca(i);
+		}
+		if(fotoAmostra==minimoFotos){
+			document.getElementById('anterior').style.display = 'none';
+		}
+		if(fotoAmostra>minimoFotos){
+			document.getElementById('anterior').style.display = 'block';
+		}
+		if(fotoAmostra<maximoFotos){
+			document.getElementById('proximo').style.display = 'block';
+		}
+		if(fotoAmostra==maximoFotos){
+			document.getElementById('proximo').style.display = 'none';
+		}
+		
+		
+	//	alert(fotoAmostra);
+		document.getElementById('mostraVez').innerHTML = fotoAmostra;
+		document.getElementById('imagemEscondida').setAttribute('src',target_folder+'/'+fotoAmostra+'.jpg');
+	}
+	function removeAll(){
+		for( var i=1; i<=11; i++){
+			remv(i);
+		}
+	}
+</script>
+</head>
+
+<body onload="iniciaJogo()">
+
+<div class="mostraFota">
+	<img id="imagemEscondida" width="599" />
+</div>
+
+<div class="mostraMario" id="remove1">
+	<img src="mario/bone.png" width="600" />
+</div>
+<div class="mostraMario" id="remove2">
+	<img src="mario/costeletas.png" width="600" />
+</div>
+<div class="mostraMario" id="remove3">
+	<img src="mario/bigode.png" width="600" />
+</div>
+<div class="mostraMario" id="remove4">
+	<img src="mario/faceBaixoDireita.png" width="600" />
+</div>
+<div class="mostraMario" id="remove5">
+	<img src="mario/orelhas.png" width="600" />
+</div>
+<div class="mostraMario" id="remove6">
+	<img src="mario/faceCimaDireita.png" width="600" />
+</div>
+<div class="mostraMario" id="remove7">
+	<img src="mario/faceCimaEsquerda.png" width="600" />
+</div>
+<div class="mostraMario" id="remove8">
+	<img src="mario/faceBaixoEsquerda.png" width="600" />
+</div>
+<div class="mostraMario" id="remove9">
+	<img src="mario/olhos.png" width="600" />
+</div>
+<div class="mostraMario" id="remove10">
+	<img src="mario/nariz.png" width="600" />
+</div>
+<div class="mostraMario" id="remove11">
+	<img src="mario/sombrancelhas.png" width="600" />
+</div>
+
+<div class="mostraMario" id="remove12">
+	<img src="mario/fundo.png" width="600" />
+</div>
+
+<ul>
+	<li id="1" onclick="remv(this.id);">CHAPÉU</li>
+    <li id="2" onclick="remv(this.id);">COSTELETAS</li>
+    <li id="3" onclick="remv(this.id);">BIGODE</li>
+    <li id="4" onclick="remv(this.id);">ROSTO BAIXO DIREITA</li>
+    <li id="5" onclick="remv(this.id);">ORELHAS</li>
+    <li id="10" onclick="remv(this.id);">NARIZ</li>
+    <li id="6" onclick="remv(this.id);"> ROSTO CIMA DIREITA</li>
+    <li id="9" onclick="remv(this.id);">OLHOS</li>
+    <li id="7" onclick="remv(this.id);">ROSTO CIMA ESQUERDA</li>
+    <li id="11" onclick="remv(this.id);">SOMBRANCELHAS</li>
+    <li id="8" onclick="remv(this.id);">ROSTO BAIXO ESQUERDA</li>   
+</ul>
+
+<div class="link">
+<table width="550" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="95"><a id="anterior" onclick="move('a');" style="cursor:pointer;">Anterior</a></td>
+    <td width="47"><div id="mostraVez"></div></td>
+    <td width="125"><a id="proximo" onclick="move('p');" style="cursor:pointer;">Proximo</a></td>
+    <td width="283"><a id="rmAll" onclick="removeAll()" style="cursor:pointer;">Remover Tudo</a></td>
+  </tr>
+</table>
+</div>
+
+</body>
+</html>
